@@ -5,20 +5,18 @@ const calculator = {
   operator: null,
 };
 function updateDisplay() {
-  // select the element with class of `calculator-screen`
+  
   const display = document.querySelector('.calculator-screen');
-  // update the value of the element with the contents of `displayValue`
   display.value = calculator.displayValue;
 }
 
 
 const keys = document.querySelector('.calculator-keys');
-keys.addEventListener('click', (event) => {
-  // Access the clicked element
+keys.addEventListener('click',function(event) {
+  
   const { target } = event;
 
-  // Check if the clicked element is a button.
-  // If not, exit from the function
+ 
   if (!target.matches('button')) {
     return;
   }
@@ -63,18 +61,17 @@ function inputDigit(digit) {
     calculator.waitingForSecondOperand = false;
     return
   }
-  // If the `displayValue` property does not contain a decimal point
+ 
   if (!calculator.displayValue.includes(dot)) {
-    // Append the decimal point
+   
     calculator.displayValue += dot;
     console.log(calculator);
   }
 }
 function handleOperator(nextOperator) {
-  // Destructure the properties on the calculator object
+  
   const { firstOperand, displayValue, operator } = calculator
-  // `parseFloat` converts the string contents of `displayValue`
-  // to a floating-point number
+ 
   const inputValue = parseFloat(displayValue);
    if (operator && calculator.waitingForSecondOperand)  {
     calculator.operator = nextOperator;
@@ -82,10 +79,9 @@ function handleOperator(nextOperator) {
     return;
   }
 
-  // verify that `firstOperand` is null and that the `inputValue`
-  // is not a `NaN` value
+ 
   if (firstOperand === null && !isNaN(inputValue)) {
-    // Update the firstOperand property
+   
     calculator.firstOperand = inputValue;
   } else if (operator) {
     const result = calculate(firstOperand, inputValue, operator);
